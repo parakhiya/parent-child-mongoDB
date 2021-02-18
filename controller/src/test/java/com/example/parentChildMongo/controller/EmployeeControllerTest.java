@@ -34,116 +34,125 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(EmployeeController.class)
 public class EmployeeControllerTest {
-  @Rule
-  public MockitoRule mockitoRule = MockitoJUnit.rule();
-  @InjectMocks
-  private EmployeeController employeeController;
-  @Autowired
-  private MockMvc mockMvc;
-  @Mock
-  private EmployeeService employeeService;
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+    @InjectMocks
+    private EmployeeController employeeController;
+    @Autowired
+    private MockMvc mockMvc;
+    @Mock
+    private EmployeeService employeeService;
 
-  private Employee employee;
-  @Test
-  public void testFind() throws Exception {
-    mockMvc.perform(get(PARENT_CHILD + "/findByIdEmployee" + ID)).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).find("6032127099ad584610d469ef");
-  }
-  @Test
-  public void testFind_WhenException() throws Exception {
-    doThrow(new RuntimeException()).when(employeeService).find("6032127099ad584610d469ef");
-    mockMvc.perform(get(PARENT_CHILD + "/findByIdEmployee" + ID)).andDo(print()).andExpect(status().isOk());
+    private Employee employee;
 
-    verify(employeeService).find("6032127099ad584610d469ef");
-  }
+    @Test
+    public void testFind() throws Exception {
+        mockMvc.perform(get(PARENT_CHILD + "/findByIdEmployee" + ID)).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).find("6032127099ad584610d469ef");
+    }
 
-  @Test
-  public void testDeleteByIdEmployee() throws Exception {
-    mockMvc.perform(get(PARENT_CHILD + "/deleteByIdEmployee" + ID + ID1)).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).delete("6032127099ad584610d469ef", "6032127099ad584610d469e8");
-  }
-  @Test
-  public void testDeleteByIdEmployee_WhenException() throws Exception {
-    doThrow(new RuntimeException()).when(employeeService).delete("6032127099ad584610d469ef","6032127099ad584610d469e8");
-    mockMvc.perform(get(PARENT_CHILD + "/deleteByIdEmployee" + ID + ID1)).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).delete("6032127099ad584610d469ef", "6032127099ad584610d469e8");
-  }
+    @Test
+    public void testFind_WhenException() throws Exception {
+        doThrow(new RuntimeException()).when(employeeService).find("6032127099ad584610d469ef");
+        mockMvc.perform(get(PARENT_CHILD + "/findByIdEmployee" + ID)).andDo(print()).andExpect(status().isOk());
 
-  @Test
-  public void testGetAllEmployees() throws Exception {
-    mockMvc.perform(get(PARENT_CHILD + "/getAllEmployees"+"/2")).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).getAllEmployees(2);
-  }
-  @Test
-  public void testGetAllEmployees_WhenException() throws Exception {
-    doThrow(new RuntimeException()).when(employeeService).getAllEmployees(2);
-    mockMvc.perform(get(PARENT_CHILD + "/getAllEmployees"+"/2")).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).getAllEmployees(2);
-  }
+        verify(employeeService).find("6032127099ad584610d469ef");
+    }
 
-  @Test
-  public void testFindHierarchy() throws Exception {
-    mockMvc.perform(get(PARENT_CHILD + "/findHierarchy" + ID)).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).findHierarchy("6032127099ad584610d469ef");
-  }
-  @Test
-  public void testFindHierarchy_WhenException() throws Exception {
-    doThrow(new RuntimeException()).when(employeeService).findHierarchy("6032127099ad584610d469ef");
-    mockMvc.perform(get(PARENT_CHILD + "/findHierarchy" + ID)).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).findHierarchy("6032127099ad584610d469ef");
-  }
+    @Test
+    public void testDeleteByIdEmployee() throws Exception {
+        mockMvc.perform(get(PARENT_CHILD + "/deleteByIdEmployee" + ID + ID1)).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).delete("6032127099ad584610d469ef", "6032127099ad584610d469e8");
+    }
 
-  @Test
-  public void testCreateEmployees() throws Exception {
-    EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", ID,null);
-    mockMvc.perform(post(PARENT_CHILD + CREATE_EMPLOYEE).contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).create(employeeRequestBody);
-  }
+    @Test
+    public void testDeleteByIdEmployee_WhenException() throws Exception {
+        doThrow(new RuntimeException()).when(employeeService).delete("6032127099ad584610d469ef", "6032127099ad584610d469e8");
+        mockMvc.perform(get(PARENT_CHILD + "/deleteByIdEmployee" + ID + ID1)).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).delete("6032127099ad584610d469ef", "6032127099ad584610d469e8");
+    }
 
-  @Test
-  public void testCreateEmployees_WhenException() throws Exception {
-    EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", ID,null);
-    doThrow(new RuntimeException()).when(employeeService).create(employeeRequestBody);
-    mockMvc.perform(post(PARENT_CHILD + CREATE_EMPLOYEE).contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).create(employeeRequestBody);
-  }
-  @Test
-  public void testGetBySalary() throws Exception {
-    mockMvc.perform(get(PARENT_CHILD + "/getBySalary"+"/1000")).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).getBySalary(1000);
-  }
-  @Test
-  public void testGetBySalary_WhenException() throws Exception {
-    doThrow(new RuntimeException()).when(employeeService).getBySalary(1000);
-    mockMvc.perform(get(PARENT_CHILD + "/getBySalary"+"/1000")).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).getBySalary(1000);
-  }
-  @Test
-  public void testUpdate() throws Exception {
-    EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", null,null);
-    mockMvc.perform(put(PARENT_CHILD + "/update"+ID).contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).update("6032127099ad584610d469ef", employeeRequestBody);
-  }
-  @Test
-  public void testUpdate_WhenException() throws Exception {
-    EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", null,null);
-    doThrow(new RuntimeException()).when(employeeService).update("6032127099ad584610d469ef", employeeRequestBody);
-    mockMvc.perform(put(PARENT_CHILD + "/update"+ID).contentType(MediaType.APPLICATION_JSON_VALUE)
-        .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
-    verify(employeeService).update("6032127099ad584610d469ef", employeeRequestBody);
-  }
+    @Test
+    public void testGetAllEmployees() throws Exception {
+        mockMvc.perform(get(PARENT_CHILD + "/getAllEmployees" + "/2")).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).getAllEmployees(2);
+    }
 
-  @Before
-  public void setUp() {
-    mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
-    employee = new Employee();
-  }
+    @Test
+    public void testGetAllEmployees_WhenException() throws Exception {
+        doThrow(new RuntimeException()).when(employeeService).getAllEmployees(2);
+        mockMvc.perform(get(PARENT_CHILD + "/getAllEmployees" + "/2")).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).getAllEmployees(2);
+    }
 
-  @After
-  public void tearDown() {
-    Mockito.verifyNoMoreInteractions(employeeService);
-  }
+    @Test
+    public void testFindHierarchy() throws Exception {
+        mockMvc.perform(get(PARENT_CHILD + "/findHierarchy" + ID)).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).findHierarchy("6032127099ad584610d469ef");
+    }
+
+    @Test
+    public void testFindHierarchy_WhenException() throws Exception {
+        doThrow(new RuntimeException()).when(employeeService).findHierarchy("6032127099ad584610d469ef");
+        mockMvc.perform(get(PARENT_CHILD + "/findHierarchy" + ID)).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).findHierarchy("6032127099ad584610d469ef");
+    }
+
+    @Test
+    public void testCreateEmployees() throws Exception {
+        EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", ID, null);
+        mockMvc.perform(post(PARENT_CHILD + CREATE_EMPLOYEE).contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).create(employeeRequestBody);
+    }
+
+    @Test
+    public void testCreateEmployees_WhenException() throws Exception {
+        EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", ID, null);
+        doThrow(new RuntimeException()).when(employeeService).create(employeeRequestBody);
+        mockMvc.perform(post(PARENT_CHILD + CREATE_EMPLOYEE).contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).create(employeeRequestBody);
+    }
+
+    @Test
+    public void testGetBySalary() throws Exception {
+        mockMvc.perform(get(PARENT_CHILD + "/getBySalary" + "/1000")).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).getBySalary(1000);
+    }
+
+    @Test
+    public void testGetBySalary_WhenException() throws Exception {
+        doThrow(new RuntimeException()).when(employeeService).getBySalary(1000);
+        mockMvc.perform(get(PARENT_CHILD + "/getBySalary" + "/1000")).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).getBySalary(1000);
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", null, null);
+        mockMvc.perform(put(PARENT_CHILD + "/update" + ID).contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).update("6032127099ad584610d469ef", employeeRequestBody);
+    }
+
+    @Test
+    public void testUpdate_WhenException() throws Exception {
+        EmployeeRequestBody employeeRequestBody = new EmployeeRequestBody("abhi", "para", null, null);
+        doThrow(new RuntimeException()).when(employeeService).update("6032127099ad584610d469ef", employeeRequestBody);
+        mockMvc.perform(put(PARENT_CHILD + "/update" + ID).contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(new ObjectMapper().writeValueAsString(employeeRequestBody))).andDo(print()).andExpect(status().isOk());
+        verify(employeeService).update("6032127099ad584610d469ef", employeeRequestBody);
+    }
+
+    @Before
+    public void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
+        employee = new Employee();
+    }
+
+    @After
+    public void tearDown() {
+        Mockito.verifyNoMoreInteractions(employeeService);
+    }
 }
