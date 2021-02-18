@@ -1,7 +1,6 @@
 package com.example.parentChildMongo.constant;
 
 public interface Constant {
-
   String PARENT_CHILD = "/parentChild";
   String GET_ALL_EMPLOYEES = "/getAllEmployees/{pageNumber}";
   String CREATE_EMPLOYEE = "/employee";
