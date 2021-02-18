@@ -25,6 +25,7 @@ import com.example.parentChildMongo.entity.GenericResponse;
 import com.example.parentChildMongo.entity.Response;
 import com.example.parentChildMongo.service.EmployeeService;
 
+//This controller is about Company Employee management
 @RestController
 @RequestMapping(PARENT_CHILD)
 public class EmployeeController {
