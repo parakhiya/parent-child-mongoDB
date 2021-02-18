@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     employeeResponseBody.setFirstName(employee.getFirstName());
     employeeResponseBody.setLastName(employee.getLastName());
     if ((employee.getManager() != null))
-      employeeResponseBody.setMaanagerName(employee.getManager().getFirstName());
+      employeeResponseBody.setManagerName(employee.getManager().getFirstName());
 
     employeeResponseBody.setSalary(employee.getSalary());
     return employeeResponseBody;

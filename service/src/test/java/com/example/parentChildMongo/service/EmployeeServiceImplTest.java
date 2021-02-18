@@ -52,7 +52,7 @@ public class EmployeeServiceImplTest {
     employeeResponseBody.setLastName(employee.getLastName());
     employeeResponseBody.setSalary(employee.getSalary());
     if (!(employee.getManager() == null))
-      employeeResponseBody.setMaanagerName(employee.getManager().getFirstName());
+      employeeResponseBody.setManagerName(employee.getManager().getFirstName());
     return employeeResponseBody;
   }
 

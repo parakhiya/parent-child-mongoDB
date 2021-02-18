@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class EmployeeResponseBody {
   private String firstName;
   private String lastName;
-  private String maanagerName;
+  private String managerName;
   private Integer salary;
 }
