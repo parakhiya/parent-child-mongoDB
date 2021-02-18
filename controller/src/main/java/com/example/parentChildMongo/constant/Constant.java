@@ -8,8 +8,8 @@ public interface Constant {
   String DELETE_BY_ID_EMPLOYEE_NOT_MANAGER = "/deleteByIdEmployee/{employeeIdOld}";
   String FIND_BY_ID_EMPLOYEE = "/findByIdEmployee/{employeeId}";
   String FIND_HIERARCHY = "/findHierarchy/{employeeId}";
-  String GET_BY_SALARY="/getBySalary/{salary}";
-  String UPDATE="/update/{employeeId}";
+  String GET_BY_SALARY = "/getBySalary/{salary}";
+  String UPDATE = "/update/{employeeId}";
   String ID = "/6032127099ad584610d469ef";
   String ID1 = "/6032127099ad584610d469e8";
 }

@@ -8,8 +8,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 public class ParentChildMongoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ParentChildMongoApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(ParentChildMongoApplication.class, args);
+  }
 
 }

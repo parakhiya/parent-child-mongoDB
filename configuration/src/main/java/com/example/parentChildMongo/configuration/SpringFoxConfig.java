@@ -18,15 +18,12 @@ public class SpringFoxConfig {
   @Bean
   public Docket api() {
 
-    return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-        .select()
-        .apis(RequestHandlerSelectors.any())
-        .paths(PathSelectors.any())
-        .build();
+    return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any())
+        .paths(PathSelectors.any()).build();
   }
-  private ApiInfo apiInfo(){
-    return new ApiInfoBuilder().title("Parent-child API")
-        .description("We provide api for Parent-child")
-        .version("V1.0").build();
+
+  private ApiInfo apiInfo() {
+    return new ApiInfoBuilder().title("Parent-child API").description("We provide api for Parent-child").version("V1.0")
+        .build();
   }
 }

@@ -5,18 +5,19 @@ import java.util.List;
 import com.example.parentChildMongo.entity.Employee;
 import com.example.parentChildMongo.entity.EmployeeRequestBody;
 import com.example.parentChildMongo.entity.EmployeeResponseBody;
-import com.example.parentChildMongo.entity.Response;
 
 public interface EmployeeService {
 
   /**
    * getAllEmployees
+   *
    * @return
    */
   List<EmployeeResponseBody> getAllEmployees(int pageNumber);
 
   /**
    * create
+   *
    * @param employee
    * @return
    */
@@ -25,6 +26,7 @@ public interface EmployeeService {
 
   /**
    * delete
+   *
    * @param employeeIdOld
    * @param employeeIdNew
    * @return
@@ -33,6 +35,7 @@ public interface EmployeeService {
 
   /**
    * find
+   *
    * @param employeeId
    * @return
    */
@@ -40,6 +43,7 @@ public interface EmployeeService {
 
   /**
    * findHierarchy
+   *
    * @param employeeId
    * @return
    */

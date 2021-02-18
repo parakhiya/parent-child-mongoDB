@@ -33,14 +33,12 @@ import com.example.parentChildMongo.service.impl.EmployeeServiceImpl;
 
 public class EmployeeServiceImplTest {
   private final static String ID = "6020e21aaf6f7e7aa0b4a2d9";
-
+  @Rule
+  public MockitoRule mockitoRule = MockitoJUnit.rule();
   @Mock
   private EmployeeRepository employeeRepository;
   @InjectMocks
   private EmployeeService employeeService = new EmployeeServiceImpl();
-  @Rule
-  public MockitoRule mockitoRule = MockitoJUnit.rule();
-
   private Employee employee;
   private Employee employeeException;
   private EmployeeRequestBody employeeRequestBody;
@@ -191,7 +189,7 @@ public class EmployeeServiceImplTest {
     when(employeeRepository.findById("6020e21aaf6f7e7aa0b4a2d9")).thenReturn(java.util.Optional.of(employee));
     when(employeeRepository.findById("6020e21aaf6f7e7aa0b4a2df")).thenReturn(java.util.Optional.of(employee));
     employeeService.delete("6020e21aaf6f7e7aa0b4a2d9", "6020e21aaf6f7e7aa0b4a2df");
-    verify(employeeRepository, times(2)).findById(anyString() );
+    verify(employeeRepository, times(2)).findById(anyString());
   }
 
   @Test

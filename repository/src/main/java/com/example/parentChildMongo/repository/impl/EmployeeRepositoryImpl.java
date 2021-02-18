@@ -22,8 +22,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
   @Autowired
   private EmployeeRepository employeeRepository;
 
-  private Employee createEmployeeFromEmployeeRequestResponseBody(
-      EmployeeRequestBody employeeRequestBody, String employeeId) {
+  private Employee createEmployeeFromEmployeeRequestResponseBody(EmployeeRequestBody employeeRequestBody,
+      String employeeId) {
     Employee employee = new Employee();
     employee.setId(employeeId);
     employee.setFirstName(employeeRequestBody.getFirstName());

@@ -1,7 +1,5 @@
 package com.example.parentChildMongo.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

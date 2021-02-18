@@ -10,8 +10,6 @@ import static com.example.parentChildMongo.constant.Constant.GET_BY_SALARY;
 import static com.example.parentChildMongo.constant.Constant.PARENT_CHILD;
 import static com.example.parentChildMongo.constant.Constant.UPDATE;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.parentChildMongo.entity.EmployeeRequestBody;
-import com.example.parentChildMongo.entity.EmployeeResponseBody;
 import com.example.parentChildMongo.entity.GenericResponse;
 import com.example.parentChildMongo.entity.Response;
 import com.example.parentChildMongo.service.EmployeeService;
@@ -38,8 +35,8 @@ public class EmployeeController {
   @PostMapping(value = CREATE_EMPLOYEE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public Response create(@RequestBody EmployeeRequestBody employeeRequestBody) {
     try {
-       employeeService.create(employeeRequestBody);
-       return new Response("Succesfully created new employee",true);
+      employeeService.create(employeeRequestBody);
+      return new Response("Succesfully created new employee", true);
     } catch (Exception e) {
       return new Response(e.getMessage(), false);
     }
@@ -50,7 +47,7 @@ public class EmployeeController {
     try {
       return new GenericResponse(employeeService.getAllEmployees(pageNumber));
     } catch (Exception e) {
-      Response response=new Response(e.getMessage(),false);
+      Response response = new Response(e.getMessage(), false);
       return new GenericResponse(response);
     }
   }
@@ -79,8 +76,8 @@ public class EmployeeController {
   public Response delete(@PathVariable(value = "employeeIdOld") String employeeIdOld,
       @PathVariable(value = "employeeIdNew", required = false) String employeeIdNew) {
     try {
-       employeeService.delete(employeeIdOld, employeeIdNew);
-      return new Response("Succesfully deleted employee",true);
+      employeeService.delete(employeeIdOld, employeeIdNew);
+      return new Response("Succesfully deleted employee", true);
 
     } catch (Exception e) {
       return new Response(e.getMessage(), false);
@@ -97,13 +94,13 @@ public class EmployeeController {
   }
 
   @PutMapping(value = {UPDATE}, produces = MediaType.APPLICATION_JSON_VALUE)
-  public Response update(@PathVariable(value = "employeeId") String employeeId,@RequestBody
-      EmployeeRequestBody employeeRequestBody) {
+  public Response update(@PathVariable(value = "employeeId") String employeeId,
+      @RequestBody EmployeeRequestBody employeeRequestBody) {
     try {
-       employeeService.update(employeeId, employeeRequestBody);
-      return new Response("Succesfully updated employee",true);
+      employeeService.update(employeeId, employeeRequestBody);
+      return new Response("Succesfully updated employee", true);
     } catch (Exception e) {
-      return new Response(e.getMessage(),false);
+      return new Response(e.getMessage(), false);
     }
   }
 }
